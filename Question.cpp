@@ -26,12 +26,11 @@ const std::string Question::toString() const
 
 bool Question::isRight(const string& user_answer)
 {
-	cout << "Question method isRight" << endl;
 	return user_answer == m_answer;
 }
 
-std::ostream& operator<< (std::ostream& out, const Question& question)
+/*std::ostream& operator<< (std::ostream& out, const Question& question)
 {
 	out << "Desscription: " << question.m_description << endl << "Answer: " << question.m_answer << endl;
 	return out;
-}
+}*/

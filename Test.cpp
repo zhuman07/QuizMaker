@@ -3,7 +3,7 @@
 Test::Test(int num_of_options)
 	: m_num_of_options(num_of_options), m_labels{ 'A', 'B', 'C', 'D' }
 {
-	cout << "Test construction" << endl;
+	
 }
 
 void Test::setOptions(const vector<string> options)
@@ -19,7 +19,6 @@ const std::string& Test::getOptionAt(char index) const
 	if (el != m_options.end()) {
 		return el->second;
 	}
-	return "Not found";
 }
 
 const std::string Test::toString() const
@@ -36,12 +35,15 @@ const std::string Test::toString() const
 
 bool Test::isRight(const string& user_answer)
 {
-	cout << "Test method isRight" << endl;
+	auto el = m_options.find(user_answer[0]);
+	if (el == m_options.end()) {
+		return false;
+	}
 	string value = getOptionAt(user_answer[0]);
 	return value == m_answer;
 }
 
-std::ostream& operator<< (std::ostream& out, const Test& test)
+/*std::ostream& operator<< (std::ostream& out, const Test& test)
 {
 	out << test.m_description << endl;
 	for (const pair<char, string>& option : test.m_options)
@@ -49,4 +51,4 @@ std::ostream& operator<< (std::ostream& out, const Test& test)
 		out << option.first << ") " << option.second << endl;
 	}
 	return out;
-}
+}*/

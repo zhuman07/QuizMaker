@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <list>
+#include <algorithm>
 #include "Question.h"
 #include "Test.h"
 #include "FillIn.h"

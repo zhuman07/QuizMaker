@@ -25,14 +25,20 @@ void Quiz::start()
 		string user_answer;
 		while (user_answer.empty()) {
 			cout << "Enter your answer" << endl;
-			cin >> user_answer;
+			getline(cin, user_answer);
 		}
-		if (question->isRight(user_answer)) {
-			cout << "Correct!" << endl;
-			correct_answer_count++;
+		try {
+			if (question->isRight(user_answer)) {
+				cout << "Correct!" << endl;
+				correct_answer_count++;
+			}
+			else
+			{
+				cout << "Incorrect!" << endl;
+			}
 		}
-		else
-		{
+		catch (exception e) {
+			cout << e.what() << endl;
 			cout << "Incorrect!" << endl;
 		}
 		j++;
@@ -62,13 +68,11 @@ Quiz& Quiz::loadFromFile(const std::string& file_name)
 
 	vector<vector<string>> collection_of_questions;
 
-	//bool is_new_question = true;
 	int count_of_questions = 0;
 	vector<string> first_question;
 	collection_of_questions.push_back(first_question);
 	for (const string& item : array_of_lines) {
 		if (item == "") {
-			//is_new_question = true;
 			count_of_questions++;
 			vector<string> tmp_collection;
 			collection_of_questions.push_back(tmp_collection);
@@ -98,6 +102,7 @@ Quiz& Quiz::loadFromFile(const std::string& file_name)
 				}
 				incorrect_answers_count++;
 			}
+			random_shuffle(options.begin(), options.end());
 			test->setOptions(options);
 			quiz.addQuestion(test);
 		}
@@ -109,6 +114,8 @@ Quiz& Quiz::loadFromFile(const std::string& file_name)
 			quiz.addQuestion(fill_in);
 		}
 	}
+
+	random_shuffle(quiz.m_questions.begin(), quiz.m_questions.end());
 
 	return quiz;
 }
