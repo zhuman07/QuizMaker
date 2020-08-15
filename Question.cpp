@@ -1,5 +1,15 @@
 #include "Question.h"
 
+Question::Question()
+{
+	cout << "Question Constructor" << endl;
+}
+
+Question::~Question()
+{
+	cout << "Question Destructor" << endl;
+}
+
 void Question::setDescription(const std::string description) {
 	m_description = description;
 }

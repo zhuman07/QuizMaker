@@ -20,7 +20,7 @@ void Quiz::start()
 	std::cout << "Start quiz '" << m_name << "'" << std::endl;
 	int correct_answer_count = 0;
 	int j = 1;
-	for (const shared_ptr<Question> question : m_questions) {
+	for (shared_ptr<Question>& question : m_questions) {
 		cout << j << ") " << question->toString() << endl;
 		string user_answer;
 		while (user_answer.empty()) {

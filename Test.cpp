@@ -1,9 +1,21 @@
 #include "Test.h"
 
 Test::Test(int num_of_options)
-	: m_num_of_options(num_of_options), m_labels{ 'A', 'B', 'C', 'D' }
+	: m_num_of_options(num_of_options)
 {
-	
+	cout << "Test construct" << endl;
+	char first_letter = 'A';
+	m_labels = new char[m_num_of_options];
+	for (int i = 0; i < m_num_of_options; i++) {
+		char next_letter = first_letter + i;
+		m_labels[i] = next_letter;
+	}
+}
+
+Test::~Test()
+{
+	cout << "Test destructor" << endl;
+	delete[] m_labels;
 }
 
 void Test::setOptions(const vector<string> options)
