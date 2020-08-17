@@ -10,21 +10,19 @@
 #include "FillIn.h"
 #include "SmartPointer.h"
 
-class Question;
-
 using namespace std;
 
 class Quiz
 {
 private:
 	std::string m_name;
-	std::vector<shared_ptr<Question>> m_questions;
+	std::vector<SmartPointer<Question>> m_questions;
 
 public:
 	void setName(const std::string& name);
 	const std::string& getName() const;
 
-	void addQuestion(shared_ptr<Question> question);
+	void addQuestion(SmartPointer<Question> question);
 
 	void start();
 	static Quiz& loadFromFile(const std::string& file_name);

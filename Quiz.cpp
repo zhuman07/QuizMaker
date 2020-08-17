@@ -10,7 +10,7 @@ const std::string& Quiz::getName() const
 	return m_name;
 }
 
-void Quiz::addQuestion(shared_ptr<Question> question)
+void Quiz::addQuestion(SmartPointer<Question> question)
 {
 	m_questions.push_back(question);
 }
@@ -20,7 +20,7 @@ void Quiz::start()
 	std::cout << "Start quiz '" << m_name << "'" << std::endl;
 	int correct_answer_count = 0;
 	int j = 1;
-	for (shared_ptr<Question>& question : m_questions) {
+	for (SmartPointer<Question>& question : m_questions) {
 		cout << j << ") " << question->toString() << endl;
 		string user_answer;
 		while (user_answer.empty()) {
@@ -90,7 +90,7 @@ Quiz& Quiz::loadFromFile(const std::string& file_name)
 
 		if (question.size() > 2) {
 			int num_of_questions = question.size() - 1;
-			shared_ptr<Test> test(new Test(num_of_questions));
+			SmartPointer<Test> test(new Test(num_of_questions));
 			test->setDescription(question[0]);
 			test->setAnwer(question[1]);
 			vector<string> options;
@@ -108,9 +108,10 @@ Quiz& Quiz::loadFromFile(const std::string& file_name)
 		}
 		else 
 		{
-			shared_ptr<FillIn> fill_in(new FillIn());
+			SmartPointer<FillIn> fill_in(new FillIn());
 			fill_in->setDescription(question[0]);
 			fill_in->setAnwer(question[1]);
+
 			quiz.addQuestion(fill_in);
 		}
 	}

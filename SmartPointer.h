@@ -1,27 +1,77 @@
 #pragma once
 #include <iostream>
-#include "Question.h"
-#include "Test.h"
-#include "FillIn.h"
 
 using namespace std;
 
-class Question;
-
-template <typename T>
+template <typename _Ty>
 class SmartPointer
 {
 private:
-	T* m_ptr;
+	_Ty* m_ptr;
 
 public:
-	SmartPointer(T* ptr);
-	SmartPointer(const SmartPointer<T>& another_ptr);
-	//SmartPointer(SmartPointer<T> &&another_ptr);
-	~SmartPointer();
-	T* operator->() const;
-	T& operator*() const;
-	SmartPointer<T>& operator=(const SmartPointer<T>& another_ptr);
-	//SmartPointer<T>& operator=(SmartPointer<T> &&another_ptr);
-	bool isNull() const;
+	SmartPointer(_Ty* ptr)
+	{
+		m_ptr = ptr;
+		cout << "SP 1 construct" << endl;
+	};
+
+	SmartPointer(const SmartPointer& another_ptr) 
+	{
+		cout << "SP copy construct" << endl;
+		m_ptr = new _Ty;
+		*m_ptr = *another_ptr.m_ptr;
+	};
+	
+	SmartPointer(SmartPointer<_Ty> &&another_ptr)
+	{
+		cout << "SP move construct" << endl;
+		m_ptr = another_ptr.m_ptr;
+		another_ptr.m_ptr = nullptr;
+	};
+
+	~SmartPointer()
+	{
+		cout << "SP destruct" << endl;
+		delete m_ptr;
+	};
+
+	_Ty* operator->() const
+	{
+		return m_ptr;
+	};
+
+	_Ty& operator*() const
+	{
+		return *m_ptr;
+	};
+
+	SmartPointer& operator=(const SmartPointer& another_ptr)
+	{
+		cout << "SP operator =" << endl;
+		if (this == &another_ptr) {
+			return *this;
+		}
+		delete m_ptr;
+		m_ptr = new _Ty;
+		*m_ptr = *another_ptr.m_ptr;
+		return *this;
+	};
+
+	SmartPointer& operator=(SmartPointer<_Ty> &&another_ptr)
+	{
+		cout << "SP operator move =" << endl;
+		if (this == &another_ptr) {
+			return *this;
+		}
+		delete m_ptr;
+		m_ptr = another_ptr.m_ptr;
+		another_ptr.m_ptr = nullptr;
+		return *this;
+	};
+
+	bool isNull() const
+	{
+		return m_ptr == nullptr;
+	};
 };
