@@ -11,7 +11,11 @@ class FillIn :
 	public Question
 {
 public:
-	const std::string toString() const final;
-	friend std::ostream& operator<< (std::ostream& out, const FillIn& fill_in);
+	FillIn();
+	~FillIn() override;
+
+	virtual const std::string toString() const;
+
+	//friend std::ostream& operator<< (std::ostream& out, const FillIn& fill_in);
 };
 

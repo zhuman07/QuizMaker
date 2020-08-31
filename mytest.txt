@@ -3,6 +3,7 @@ correct answer
 incorrect answer 1
 incorrect answer 2
 incorrect answer 3
+incorrect answer 4
 
 Second question?
 correct answer
@@ -15,6 +16,8 @@ correct answer
 incorrect answer 1
 incorrect answer 2
 incorrect answer 3
+incorrect answer 4
+incorrect answer 5
 
 Fourth question _____ fill in type?
 correct answer

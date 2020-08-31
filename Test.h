@@ -17,13 +17,17 @@ class Test :
 private:
 	map<char, string> m_options;
 	int m_num_of_options;
-	char m_labels[4];
+	char* m_labels;
 public:
-	Test(int num_of_options);
+	Test();
+	//Test(int num_of_options);
+	~Test() override;
+	void setNumOfOptions(int num_of_options);
 	void setOptions(const vector<string> options);
 	const std::string& getOptionAt(char index) const;
-	const std::string toString() const final;
-	bool isRight(const string& user_answer) final;
-	friend std::ostream& operator<< (std::ostream& out, const Test& test);
+	virtual bool isRight(const string& user_answer) override final;
+
+	virtual const std::string toString() const;
+	//friend std::ostream& operator<< (std::ostream& out, const Test& test);
 };
 
