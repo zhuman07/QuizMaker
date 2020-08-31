@@ -25,6 +25,6 @@ public:
 	void addQuestion(SmartPointer<Question> question);
 
 	void start();
-	static Quiz& loadFromFile(const std::string& file_name);
+	static SmartPointer<Quiz> loadFromFile(const std::string& file_name);
 };
 

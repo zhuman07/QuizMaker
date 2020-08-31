@@ -12,7 +12,7 @@ const std::string& Quiz::getName() const
 
 void Quiz::addQuestion(SmartPointer<Question> question)
 {
-	m_questions.push_back(question);
+	m_questions.push_back(move(question));
 }
 
 void Quiz::start()
@@ -20,7 +20,7 @@ void Quiz::start()
 	std::cout << "Start quiz '" << m_name << "'" << std::endl;
 	int correct_answer_count = 0;
 	int j = 1;
-	for (SmartPointer<Question>& question : m_questions) {
+	for (const SmartPointer<Question>& question : m_questions) {
 		cout << j << ") " << question->toString() << endl;
 		string user_answer;
 		while (user_answer.empty()) {
@@ -45,16 +45,16 @@ void Quiz::start()
 	}
 }
 
-Quiz& Quiz::loadFromFile(const std::string& file_name)
+SmartPointer<Quiz> Quiz::loadFromFile(const std::string& file_name)
 {
 	std::ifstream infile(file_name);
 	if (!infile) {
 		throw new std::exception("File not found");
 	}
 
-	static Quiz quiz;
+	SmartPointer<Quiz> quiz = new Quiz();
 
-	quiz.setName(file_name);
+	quiz->setName(file_name);
 
 	std::vector<std::string> array_of_lines;
 	string str_line;
@@ -90,7 +90,8 @@ Quiz& Quiz::loadFromFile(const std::string& file_name)
 
 		if (question.size() > 2) {
 			int num_of_questions = question.size() - 1;
-			SmartPointer<Test> test(new Test(num_of_questions));
+			Test* test = new Test();
+			test->setNumOfOptions(num_of_questions);
 			test->setDescription(question[0]);
 			test->setAnwer(question[1]);
 			vector<string> options;
@@ -104,19 +105,20 @@ Quiz& Quiz::loadFromFile(const std::string& file_name)
 			}
 			random_shuffle(options.begin(), options.end());
 			test->setOptions(options);
-			quiz.addQuestion(test);
+			SmartPointer<Question> ptr = test;
+			quiz->addQuestion(move(ptr));
 		}
 		else 
 		{
-			SmartPointer<FillIn> fill_in(new FillIn());
+			FillIn* fill_in = new FillIn();
 			fill_in->setDescription(question[0]);
 			fill_in->setAnwer(question[1]);
-
-			quiz.addQuestion(fill_in);
+			SmartPointer<Question> ptr = fill_in;
+			quiz->addQuestion(move(ptr));
 		}
 	}
 
-	random_shuffle(quiz.m_questions.begin(), quiz.m_questions.end());
+	random_shuffle(quiz->m_questions.begin(), quiz->m_questions.end());
 
 	return quiz;
 }

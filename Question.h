@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -15,12 +16,14 @@ protected:
 public:
 	Question();
 	virtual ~Question();
-	void setDescription(const std::string description);
-	void setAnwer(const std::string answer);
-	const std::string& getDescription() const;
-	const std::string& getAnswer() const;
-	virtual const std::string toString() const;
+	virtual void setDescription(const std::string description);
+	virtual void setAnwer(const std::string answer);
+	virtual const std::string& getDescription() const;
+	virtual const std::string& getAnswer() const;
+	
 	virtual bool isRight(const string& user_answer);
+
+	virtual const std::string toString() const;
 	//virtual void setOptions(const vector<string> options) {};
 	//friend std::ostream& operator<< (std::ostream& out, const Question& question);
 };

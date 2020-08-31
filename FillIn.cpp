@@ -16,9 +16,9 @@ const std::string FillIn::toString() const
 	return str;
 }
 
-std::ostream& operator<< (std::ostream& out, const FillIn& fill_in)
+/*std::ostream& operator<< (std::ostream& out, const FillIn& fill_in)
 {
 	out << fill_in.m_description << endl;
 	return out;
-}
+}*/
 

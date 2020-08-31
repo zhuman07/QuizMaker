@@ -13,7 +13,9 @@ class FillIn :
 public:
 	FillIn();
 	~FillIn() override;
-	const std::string toString() const final;
-	friend std::ostream& operator<< (std::ostream& out, const FillIn& fill_in);
+
+	virtual const std::string toString() const;
+
+	//friend std::ostream& operator<< (std::ostream& out, const FillIn& fill_in);
 };
 

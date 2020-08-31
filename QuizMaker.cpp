@@ -17,8 +17,8 @@ int main()
 	std::cin >> file_name;
 
 	try {
-		Quiz quiz = Quiz::loadFromFile(file_name);
-		quiz.start();
+		SmartPointer<Quiz> quiz = Quiz::loadFromFile(file_name);
+		quiz->start();
 	}
 	catch (exception e) {
 		cout << e.what() << endl;

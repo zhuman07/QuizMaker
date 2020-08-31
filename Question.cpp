@@ -28,15 +28,15 @@ const std::string& Question::getAnswer() const
 	return m_answer;
 }
 
-const std::string Question::toString() const
-{
-	std::string str = "Description: \n\t";
-	return str;
-}
-
 bool Question::isRight(const string& user_answer)
 {
 	return user_answer == m_answer;
+}
+
+const std::string Question::toString() const
+{
+	std::string str = "Question description: \n\t";
+	return str;
 }
 
 /*std::ostream& operator<< (std::ostream& out, const Question& question)
